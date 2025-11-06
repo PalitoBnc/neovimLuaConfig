@@ -30,6 +30,13 @@ vim.opt.ignorecase = true --recognize commands even in lowercase (for search onl
 -->>lsp
 --"<Leader>go"
 --"<Leader>ii"
+-->>telescope
+--"<Leader>ff"
+--"<Leader>fg"
+--"<Leader>fb"
+--"<Leader>fh"
+--"<Leader>fa"
+--"<Leader>ga"
 -->>other
 --"<Leader>ch"
 --"<A-down>"
@@ -42,12 +49,42 @@ vim.g.mapleader = "ç"
 -->>lsp
 vim.api.nvim_set_keymap("n", "<Leader>go", ":lua vim.lsp.buf.definition()<Enter>", {noremap = false})
 vim.api.nvim_set_keymap("n", "<Leader>ii", ":lua vim.lsp.buf.hover()<Enter>", {noremap = false})
+-->>telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>ga', function ()
+    local opts = {
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",          -- Include hidden files
+            "--no-ignore",        -- Ignore .gitignore and .ignore files
+            "--follow",           -- Follow symlinks
+        },
+    }
+    builtin.live_grep(opts)
+end, { desc = 'Telescope grep all' })
+vim.keymap.set('n', '<leader>fa', function()
+    builtin.find_files({
+        cwd = vim.fn.expand("~"),
+        hidden = true,
+        no_ignore = true,
+    })
+end, { desc = 'Telescope find all files' })
 -->>other
 vim.api.nvim_set_keymap("n", "<Leader>ch", ":noh<Enter>", {noremap = false})
 vim.api.nvim_set_keymap("n", "<A-down>", "ddp", {noremap = false})
-vim.api.nvim_set_keymap("n", "<A-up>", "dd2kp", {noremap = false})
+vim.api.nvim_set_keymap("n", "<A-up>", "ddkP", {noremap = false})
 vim.api.nvim_set_keymap("n", "<A-j>", "ddp", {noremap = false})
-vim.api.nvim_set_keymap("n", "<A-k>", "dd2kp", {noremap = false})
+vim.api.nvim_set_keymap("n", "<A-k>", "ddkP", {noremap = false})
 
 --about diagnostics
 vim.diagnostic.config({

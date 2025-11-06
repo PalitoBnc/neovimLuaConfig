@@ -35,6 +35,7 @@ require("lazy").setup({
 
                 highlight = {
                     enable = true,
+                    disable = { "csv", "tsv",},
                 },
                 incremental_selection = {
                     enable = true,
@@ -184,13 +185,41 @@ require("lazy").setup({
        "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" }, -- ícones bonitinhos
         config = function()
-          require("lualine").setup({
-            options = {
-              theme = "auto", -- pega o tema atual
-              section_separators = "",
-              component_separators = "",
-            },
-          })
+            require("lualine").setup({
+                options = {
+                    theme = "auto", -- pega o tema atual
+                    section_separators = "",
+                    component_separators = "",
+                },
+            })
         end,
+    },
+    {
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.8",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function ()
+            require("telescope").setup({
+            })
+        end,
+    },
+    {
+        'cameron-wags/rainbow_csv.nvim',
+        config = true,
+        ft = {
+            'csv',
+            'tsv',
+            'csv_semicolon',
+            'csv_whitespace',
+            'csv_pipe',
+            'rfc_csv',
+            'rfc_semicolon'
+        },
+        cmd = {
+            'RainbowDelim',
+            'RainbowDelimSimple',
+            'RainbowDelimQuoted',
+            'RainbowMultiDelim'
+        }
     },
 })
