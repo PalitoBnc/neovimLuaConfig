@@ -35,6 +35,7 @@ vim.opt.ignorecase = true --recognize commands even in lowercase (for search onl
 --"<Leader>fg"
 --"<Leader>fb"
 --"<Leader>fh"
+--"<Leader>fc"
 --"<Leader>fa"
 --"<Leader>ga"
 -->>other
@@ -55,6 +56,11 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>fc', function ()
+    builtin.find_files {
+        cwd = vim.fn.stdpath("config")
+    }
+end, { desc = 'Telescope search in config directory' })
 vim.keymap.set('n', '<leader>ga', function ()
     local opts = {
         vimgrep_arguments = {
@@ -74,7 +80,6 @@ vim.keymap.set('n', '<leader>ga', function ()
 end, { desc = 'Telescope grep all' })
 vim.keymap.set('n', '<leader>fa', function()
     builtin.find_files({
-        cwd = vim.fn.expand("~"),
         hidden = true,
         no_ignore = true,
     })
@@ -102,6 +107,18 @@ vim.cmd [[
     highlight LineNr guibg=NONE ctermbg=NONE
     highlight SignColumn guibg=NONE ctermbg=NONE
 ]]
+
+--about diff mode:
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.defer_fn(function()
+      if vim.wo.diff then
+        vim.cmd.colorscheme("habamax") -- seu tema para diff
+      end
+    end, 100)
+  end
+})
+
 
 --Testing 
 print("Initializing init.lua!")
