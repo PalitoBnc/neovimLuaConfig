@@ -18,6 +18,8 @@ vim.opt.splitright = true --set to true/flase to new splits splt at the right or
 vim.opt.virtualedit = "block" --only in visual block mode, virtual editing is enabled
 -- vim.opt.inccommand = "split" --when replacing a word, a preview window will be shown
 vim.opt.ignorecase = true --recognize commands even in lowercase (for search only)
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevelstart = 99
 
 --about keybinds
 
@@ -110,13 +112,13 @@ vim.cmd [[
 
 --about diff mode:
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.defer_fn(function()
-      if vim.wo.diff then
-        vim.cmd.colorscheme("habamax") -- seu tema para diff
-      end
-    end, 100)
-  end
+    callback = function()
+        vim.defer_fn(function()
+            if vim.wo.diff then
+                vim.cmd.colorscheme("habamax") -- seu tema para diff
+            end
+        end, 200)
+    end
 })
 
 
