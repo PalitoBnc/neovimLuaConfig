@@ -18,20 +18,29 @@ vim.opt.splitright = true --set to true/flase to new splits splt at the right or
 vim.opt.virtualedit = "block" --only in visual block mode, virtual editing is enabled
 -- vim.opt.inccommand = "split" --when replacing a word, a preview window will be shown
 vim.opt.ignorecase = true --recognize commands even in lowercase (for search only)
-vim.opt.foldmethod = 'indent'
+
+--about folds
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.o.fillchars = 'eob: ,fold: ,foldopen:⌄,foldsep: ,foldinner: ,foldclose:›'
+
 
 --about keybinds
 
 --keybinds already in use:
+
 -->>treesitter
 -- "<Leader>ss"
 -- "<Leader>si"
 -- "<Leader>sd"
 -- "<Leader>sc"
+
 -->>lsp
 --"<Leader>go"
 --"<Leader>ii"
+
 -->>telescope
 --"<Leader>ff"
 --"<Leader>fg"
@@ -40,6 +49,12 @@ vim.opt.foldlevelstart = 99
 --"<Leader>fc"
 --"<Leader>fa"
 --"<Leader>ga"
+
+-->>ufo
+--"zR"
+--"zM"
+--"zv"
+
 -->>other
 --"<Leader>ch"
 --"<A-down>"
@@ -86,6 +101,15 @@ vim.keymap.set('n', '<leader>fa', function()
         no_ignore = true,
     })
 end, { desc = 'Telescope find all files' })
+-->>ufo
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds, { desc = "Open all folds" })
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds, { desc = "Close all folds" })
+vim.keymap.set('n', 'zv', function ()
+    local winid = require('ufo').peekFoldedLinesUnderCursor()
+    if not winid then
+        vim.lsp.buf.hover()
+    end
+end, { desc = "Peek fold" })
 -->>other
 vim.api.nvim_set_keymap("n", "<Leader>ch", ":noh<Enter>", {noremap = false})
 vim.api.nvim_set_keymap("n", "<A-down>", "ddp", {noremap = false})
@@ -109,6 +133,12 @@ vim.cmd [[
     highlight LineNr guibg=NONE ctermbg=NONE
     highlight SignColumn guibg=NONE ctermbg=NONE
 ]]
+--removes foldcolumn bg
+vim.defer_fn(function ()
+    vim.cmd("highlight FoldColumn guibg=NONE ctermbg=NONE")
+end, 100)
+--adds visual padding to the right of the text
+vim.opt.statuscolumn = "%C%s%l "
 
 --about diff mode:
 vim.api.nvim_create_autocmd("VimEnter", {
