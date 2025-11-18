@@ -120,7 +120,8 @@ vim.api.nvim_set_keymap("n", "<A-k>", "ddkP", {noremap = false})
 --about diagnostics
 vim.diagnostic.config({
     virtual_text = false, --display text at the rigt of the screen for diagnostics
-    virtual_lines = true --display text at the bottom of the lines for diagnostics
+    virtual_lines = true, --display text at the bottom of the lines for diagnostics
+    signs = true,
 })
 
 --about appearence
@@ -141,7 +142,7 @@ end, 100)
 -->>removes ufo background
 vim.cmd("highlight UfoFoldedBg guibg=NONE ctermbg=NONE")
 --adds visual padding to the right of the text
-vim.opt.statuscolumn = "%C%s%l "
+vim.opt.statuscolumn = "%s %C%l "
 
 --about diff mode:
 vim.api.nvim_create_autocmd("VimEnter", {
