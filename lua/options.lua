@@ -142,7 +142,7 @@ end, 100)
 -->>removes ufo background
 vim.cmd("highlight UfoFoldedBg guibg=NONE ctermbg=NONE")
 --adds visual padding to the right of the text
-vim.opt.statuscolumn = "%s %C%l "
+vim.opt.statuscolumn = " %s%C%l "
 
 --about diff mode:
 vim.api.nvim_create_autocmd("VimEnter", {
