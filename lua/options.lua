@@ -51,8 +51,8 @@ vim.o.fillchars = 'eob: ,fold: ,foldopen:⌄,foldsep: ,foldinner: ,foldclose:›
 --"<Leader>ga"
 
 -->>ufo
---"zR"
---"zM"
+--"zr"
+--"zh"
 --"zv"
 
 -->>other
@@ -102,8 +102,8 @@ vim.keymap.set('n', '<leader>fa', function()
     })
 end, { desc = 'Telescope find all files' })
 -->>ufo
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds, { desc = "Open all folds" })
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds, { desc = "Close all folds" })
+vim.keymap.set('n', 'zr', require('ufo').openAllFolds, { desc = "Open all folds" })
+vim.keymap.set('n', 'zh', require('ufo').closeAllFolds, { desc = "Close all folds" })
 vim.keymap.set('n', 'zv', function ()
     local winid = require('ufo').peekFoldedLinesUnderCursor()
     if not winid then
@@ -133,10 +133,13 @@ vim.cmd [[
     highlight LineNr guibg=NONE ctermbg=NONE
     highlight SignColumn guibg=NONE ctermbg=NONE
 ]]
---removes foldcolumn bg
+-->>removes foldcolumn and Folded bg
 vim.defer_fn(function ()
     vim.cmd("highlight FoldColumn guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight Folded guibg=NONE ctermbg=NONE")
 end, 100)
+-->>removes ufo background
+vim.cmd("highlight UfoFoldedBg guibg=NONE ctermbg=NONE")
 --adds visual padding to the right of the text
 vim.opt.statuscolumn = "%C%s%l "
 
