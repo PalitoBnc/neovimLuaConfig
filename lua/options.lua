@@ -61,6 +61,9 @@ vim.o.fillchars = 'eob: ,fold: ,foldopen:⌄,foldsep: ,foldinner: ,foldclose:›
 --"<A-up>"
 --"<A-j>"
 --"<A-k>"
+--"<Leader>bn"
+--"<Leader>bp"
+--"<Leader>bs"
 
 -->>Leader:
 vim.g.mapleader = "ç"
@@ -116,6 +119,9 @@ vim.api.nvim_set_keymap("n", "<A-down>", "ddp", {noremap = false})
 vim.api.nvim_set_keymap("n", "<A-up>", "ddkP", {noremap = false})
 vim.api.nvim_set_keymap("n", "<A-j>", "ddp", {noremap = false})
 vim.api.nvim_set_keymap("n", "<A-k>", "ddkP", {noremap = false})
+vim.keymap.set("n", "<Leader>bn", ":bnext<Enter>", { desc = "to the next buffer" })
+vim.keymap.set("n", "<Leader>bp", ":bprevious<Enter>", { desc = "to the previous buffer" })
+vim.keymap.set("n", "<Leader>bs", ":buffers<Enter>", { desc = "show all buffers" })
 
 --about diagnostics
 vim.diagnostic.config({
