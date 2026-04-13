@@ -122,6 +122,10 @@ vim.api.nvim_set_keymap("n", "<A-k>", "ddkP", {noremap = false})
 vim.keymap.set("n", "<Leader>bn", ":bnext<Enter>", { desc = "to the next buffer" })
 vim.keymap.set("n", "<Leader>bp", ":bprevious<Enter>", { desc = "to the previous buffer" })
 vim.keymap.set("n", "<Leader>bs", ":buffers<Enter>", { desc = "show all buffers" })
+vim.keymap.set("n", "<Leader>dt", function ()
+    local new_config = not vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = "Toggle diagnostic virtual_lines" })
 
 --about diagnostics
 vim.diagnostic.config({
