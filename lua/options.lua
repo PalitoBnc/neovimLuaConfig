@@ -64,6 +64,7 @@ vim.o.fillchars = 'eob: ,fold: ,foldopen:⌄,foldsep: ,foldinner: ,foldclose:›
 --"<Leader>bn"
 --"<Leader>bp"
 --"<Leader>bs"
+--"<Leader>dt"
 
 -->>Leader:
 vim.g.mapleader = "ç"
