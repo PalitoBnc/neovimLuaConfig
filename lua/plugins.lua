@@ -28,7 +28,7 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
-            require("nvim-treesitter.configs").setup ({
+            require("nvim-treesitter.config").setup ({
                 ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "cpp", "rust" },
 
                 auto_install = true,
@@ -233,19 +233,19 @@ require("lazy").setup({
             })
         end,
     },
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
-        config = function ()
-            require("markview").setup({
-                icon_provider = "mini",
-            })
-        end,
-    },
-    {
-        "nvim-mini/mini.nvim",
-        version = false,
-    },
+--  {
+--      "OXY2DEV/markview.nvim",
+--      lazy = false,
+--      config = function ()
+--          require("markview").setup({
+--              icon_provider = "mini",
+--          })
+--      end,
+--  },
+--  {
+--      "nvim-mini/mini.nvim",
+--      version = false,
+--  },
     {
         "3rd/image.nvim",
         config = function ()
